@@ -1,6 +1,5 @@
 package com.springCommerce.commerce.controller;
 
-
 import com.springCommerce.commerce.dto.CreateUserRequest;
 import com.springCommerce.commerce.dto.UpdateUserRequest;
 import com.springCommerce.commerce.dto.UserDto;
@@ -15,30 +14,49 @@ import java.util.List;
 @RequestMapping("/v1/user")
 public class UserController {
 
-    private final UserService userService;
+  private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+  public UserController(UserService userService) {
+    this.userService = userService;
+  }
 
-    @GetMapping
-    public ResponseEntity<List<UserDto>> getAllUsers(){
-        return ResponseEntity.ok(userService.getAllUsers());
-    }
+  @GetMapping
+  public ResponseEntity<List<UserDto>> getAllUsers() {
+    return ResponseEntity.ok(userService.getAllUsers());
+  }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long id){
-        return ResponseEntity.ok(userService.getUserById(id));
-    }
+  @GetMapping("/{mail}")
+  public ResponseEntity<UserDto> getUserByMail(
+      @RequestParam(value = "mail") @PathVariable String mail) {
+    return ResponseEntity.ok(userService.getUserByMail(mail));
+  }
 
-    @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody CreateUserRequest userRequest){
-        return ResponseEntity.ok(userService.createUser(userRequest));
-    }
+  @PostMapping
+  public ResponseEntity<UserDto> createUser(@RequestBody CreateUserRequest userRequest) {
+    return ResponseEntity.ok(userService.createUser(userRequest));
+  }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long id, @RequestBody UpdateUserRequest updateUserRequest){
-        return ResponseEntity.ok(userService.updateUser(id, updateUserRequest));
-    }
+  @PutMapping("/{mail}")
+  public ResponseEntity<UserDto> updateUser(
+      @PathVariable("mail") String mail, @RequestBody UpdateUserRequest updateUserRequest) {
+    return ResponseEntity.ok(userService.updateUser(mail, updateUserRequest));
+  }
 
+  @PatchMapping("/{id}")
+  public ResponseEntity<Void> deactivateUser(@PathVariable("id") Long id) {
+    userService.deactivateUser(id);
+    return ResponseEntity.ok().build();
+  }
+
+  @PatchMapping("/{id}/active")
+  public ResponseEntity<Void> activeUser(@PathVariable("id") Long id) {
+    userService.activeUser(id);
+    return ResponseEntity.ok().build();
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id) {
+    userService.deleteUser(id);
+    return ResponseEntity.ok().build();
+  }
 }

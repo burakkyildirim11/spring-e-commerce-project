@@ -12,16 +12,17 @@ import lombok.*;
 @Table(name = "users")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @NonNull
-    private String firstName;
-    @NonNull
-    private String middleName;
-    @NonNull
-    private String lastName;
-    @NonNull
-    private String mail;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
+  @NonNull private String firstName;
+  @NonNull private String middleName;
+  @NonNull private String lastName;
+
+  @NonNull
+  @Column(unique = true)
+  private String mail;
+
+  @NonNull private Boolean isActive;
 }
