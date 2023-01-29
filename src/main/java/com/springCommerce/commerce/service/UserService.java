@@ -27,7 +27,7 @@ public class UserService {
   }
 
   public List<UserDto> getAllUsers() {
-    return userRepository.findAll().stream().map(userDtoConverter::convert).toList();
+    return userDtoConverter.convert(userRepository.findAll());
   }
 
   public UserDto getUserById(Long id) {
@@ -47,7 +47,7 @@ public class UserService {
             createUserRequest.getMiddleName(),
             createUserRequest.getLastName(),
             createUserRequest.getMail(),
-            true);
+            false);
     return userDtoConverter.convert(userRepository.save(user));
   }
 
