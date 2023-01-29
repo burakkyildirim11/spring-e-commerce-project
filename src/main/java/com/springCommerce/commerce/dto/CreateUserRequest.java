@@ -1,9 +1,6 @@
 package com.springCommerce.commerce.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -15,5 +12,4 @@ public class CreateUserRequest {
   private String middleName;
   private String lastName;
   private String mail;
-  private Boolean isActive;
 }

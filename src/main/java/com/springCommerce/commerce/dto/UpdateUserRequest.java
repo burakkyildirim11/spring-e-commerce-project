@@ -1,15 +1,17 @@
 package com.springCommerce.commerce.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class UpdateUserRequest {
 
-  private String firstName;
-  private String middleName;
-  private String lastName;
-  private String mail;
-  private Boolean isActive;
+  @NonNull private String firstName;
+  @NonNull private String middleName;
+  @NonNull private String lastName;
+  @NonNull private String mail;
+  @NonNull private Boolean isActive;
 }

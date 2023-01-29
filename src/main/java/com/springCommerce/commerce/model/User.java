@@ -3,6 +3,8 @@ package com.springCommerce.commerce.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Objects;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -25,4 +27,22 @@ public class User {
   private String mail;
 
   @NonNull private Boolean isActive;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    User user = (User) o;
+    return Objects.equals(id, user.id)
+        && firstName.equals(user.firstName)
+        && middleName.equals(user.middleName)
+        && lastName.equals(user.lastName)
+        && mail.equals(user.mail)
+        && isActive.equals(user.isActive);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, firstName, middleName, lastName, mail, isActive);
+  }
 }
