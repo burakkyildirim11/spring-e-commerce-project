@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 
 public class TestSupport {
 
-  private static Long userId = 100L;
+  public static Long userId = 100L;
 
   public static List<User> generateUsers() {
 
@@ -39,12 +39,7 @@ public class TestSupport {
 
   public static User generateUser(String mail) {
     return new User(
-        ((long) userId),
-        userId + "firstName",
-        userId + "middleName",
-        userId + "lastName",
-        mail,
-        true);
+        userId, userId + "firstName", userId + "middleName", userId + "lastName", mail, true);
   }
 
   public static UserDto generateUserDto(String mail) {
