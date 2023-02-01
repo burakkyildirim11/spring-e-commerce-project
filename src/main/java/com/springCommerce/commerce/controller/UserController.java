@@ -3,7 +3,6 @@ package com.springCommerce.commerce.controller;
 import com.springCommerce.commerce.dto.CreateUserRequest;
 import com.springCommerce.commerce.dto.UpdateUserRequest;
 import com.springCommerce.commerce.dto.UserDto;
-import com.springCommerce.commerce.model.User;
 import com.springCommerce.commerce.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +49,7 @@ public class UserController {
 
   @PatchMapping("/{id}/active")
   public ResponseEntity<Void> activeUser(@PathVariable("id") Long id) {
-    userService.activeUser(id);
+    userService.activateUser(id);
     return ResponseEntity.ok().build();
   }
 

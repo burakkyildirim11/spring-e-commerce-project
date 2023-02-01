@@ -4,7 +4,7 @@ import com.springCommerce.commerce.dto.CreateUserRequest;
 import com.springCommerce.commerce.dto.UpdateUserRequest;
 import com.springCommerce.commerce.dto.UserDto;
 import com.springCommerce.commerce.dto.UserDtoConverter;
-import com.springCommerce.commerce.exception.UserNotFoundException;
+import com.springCommerce.commerce.exception.*;
 import com.springCommerce.commerce.model.User;
 import com.springCommerce.commerce.repository.UserRepository;
 import org.slf4j.Logger;
@@ -28,11 +28,6 @@ public class UserService {
 
   public List<UserDto> getAllUsers() {
     return userDtoConverter.convert(userRepository.findAll());
-  }
-
-  public UserDto getUserById(Long id) {
-    User user = findUserById(id);
-    return userDtoConverter.convert(user);
   }
 
   public UserDto getUserByMail(String mail) {
@@ -69,14 +64,14 @@ public class UserService {
     User user = findUserByMail(mail);
     if (!user.getIsActive()) {
       logger.warn("The user wanted update is not active!, user mail: {}", mail);
-      throw new UserNotFoundException("The user wanted update is not active!");
+      throw new UserIsNotActiveException("The user wanted update is not active!");
     }
 
     user.setFirstName(updateUserRequest.getFirstName());
     user.setMiddleName(updateUserRequest.getMiddleName());
     user.setLastName(updateUserRequest.getLastName());
-    user.setMail(updateUserRequest.getMail());
-    user.setIsActive(updateUserRequest.getIsActive());
+    user.setMail(user.getMail());
+    user.setIsActive(user.getIsActive());
 
     return userDtoConverter.convert(userRepository.save(user));
   }
@@ -85,7 +80,7 @@ public class UserService {
     changeActivateUser(id, false);
   }
 
-  public void activeUser(Long id) {
+  public void activateUser(Long id) {
     changeActivateUser(id, true);
   }
 
@@ -95,15 +90,8 @@ public class UserService {
     userRepository.save(user);
   }
 
-  private boolean doesUserExist(Long id) {
-    return userRepository.existsById(id);
-  }
-
   public void deleteUser(Long id) {
-    if (doesUserExist(id)) {
-      userRepository.deleteById(id);
-    } else {
-      throw new UserNotFoundException("User could not be found by following id: " + id);
-    }
+    findUserById(id);
+    userRepository.deleteById(id);
   }
 }
