@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -27,6 +28,18 @@ public class Users {
   private String mail;
 
   @NonNull private Boolean isActive;
+
+  @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  private Set<UserDetails> userDetailsSet;
+
+  public Users(Long id, @NonNull String firstName, @NonNull String middleName, @NonNull String lastName, @NonNull String mail, @NonNull Boolean isActive) {
+    this.id = id;
+    this.firstName = firstName;
+    this.middleName = middleName;
+    this.lastName = lastName;
+    this.mail = mail;
+    this.isActive = isActive;
+  }
 
   @Override
   public boolean equals(Object o) {
