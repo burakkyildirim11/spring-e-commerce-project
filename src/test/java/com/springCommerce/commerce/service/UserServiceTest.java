@@ -1,12 +1,12 @@
 package com.springCommerce.commerce.service;
 
 import com.springCommerce.commerce.dto.CreateUserRequest;
-import com.springCommerce.commerce.model.User;
+import com.springCommerce.commerce.model.Users;
 import com.springCommerce.commerce.dto.*;
 import com.springCommerce.commerce.exception.*;
 import com.springCommerce.commerce.TestSupport;
 import com.springCommerce.commerce.dto.UserDtoConverter;
-import com.springCommerce.commerce.repository.UserRepository;
+import com.springCommerce.commerce.repository.UsersRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,21 +19,21 @@ import static org.mockito.Mockito.*;
 class UserServiceTest extends TestSupport {
 
   private UserDtoConverter converter;
-  private UserRepository repository;
+  private UsersRepository repository;
 
   private UserService userService;
 
   @BeforeEach
   public void setUp() {
     converter = mock(UserDtoConverter.class);
-    repository = mock(UserRepository.class);
+    repository = mock(UsersRepository.class);
 
     userService = new UserService(repository, converter);
   }
 
   @Test
   void testGetAllUsers_itShouldReturnUserDtoList() {
-    List<User> userList = generateUsers();
+    List<Users> userList = generateUsers();
     List<UserDto> userDtoList = generateUserDtoList(userList);
 
     when(repository.findAll()).thenReturn(userList);
@@ -49,7 +49,7 @@ class UserServiceTest extends TestSupport {
   @Test
   void testGetUserByMail_whenUserMailExist_itShouldReturnUserDto() {
     String mail = "test@mail.com";
-    User user = generateUser(mail);
+    Users user = generateUser(mail);
     UserDto userDto = generateUserDto(mail);
 
     when(repository.findByMail(mail)).thenReturn(Optional.of(user));
@@ -79,8 +79,8 @@ class UserServiceTest extends TestSupport {
 
     String mail = "test@mail.com";
     CreateUserRequest request = new CreateUserRequest("firstName", "middleName", "lastName", mail);
-    User user = new User("firstName", "middleName", "lastName", mail, false);
-    User savedUser = new User(1L, "firstName", "middleName", "lastName", mail, false);
+    Users user = new Users("firstName", "middleName", "lastName", mail, false);
+    Users savedUser = new Users(1L, "firstName", "middleName", "lastName", mail, false);
     UserDto userDto = new UserDto("firstName", "middleName", "lastName", mail);
 
     when(repository.save(user)).thenReturn(savedUser);
@@ -99,9 +99,9 @@ class UserServiceTest extends TestSupport {
 
     String mail = "test@mail.com";
     UpdateUserRequest request = new UpdateUserRequest("firstName2", "middleName2", "lastName2");
-    User user = new User(1L, "firstName", "middleName", "lastName", mail, true);
-    User savedUser = new User(1L, "firstName2", "middleName2", "lastName2", mail, true);
-    User updateUser = new User(1L, "firstName2", "middleName2", "lastName2", mail, true);
+    Users user = new Users(1L, "firstName", "middleName", "lastName", mail, true);
+    Users savedUser = new Users(1L, "firstName2", "middleName2", "lastName2", mail, true);
+    Users updateUser = new Users(1L, "firstName2", "middleName2", "lastName2", mail, true);
     UserDto userDto = new UserDto("firstName2", "middleName2", "lastName2", mail);
 
     when(repository.findByMail(mail)).thenReturn(Optional.of(user));
@@ -137,7 +137,7 @@ class UserServiceTest extends TestSupport {
 
     String mail = "test@mail.com";
     UpdateUserRequest request = new UpdateUserRequest("firstName2", "middleName2", "lastName2");
-    User user = new User(1L, "firstName", "middleName", "lastName", mail, false);
+    Users user = new Users(1L, "firstName", "middleName", "lastName", mail, false);
 
     when(repository.findByMail(mail)).thenReturn(Optional.of(user));
 
@@ -151,9 +151,9 @@ class UserServiceTest extends TestSupport {
   @Test
   void testDeactivateUser_whenUserIdExist_itShouldUserByActiveFalse() {
 
-    User user = new User(userId, "firstName", "middleName", "lastName", "test@mail.com", true);
-    User savedUser =
-        new User(userId, "firstName", "middleName", "lastName", "test@mail.com", false);
+    Users user = new Users(userId, "firstName", "middleName", "lastName", "test@mail.com", true);
+    Users savedUser =
+        new Users(userId, "firstName", "middleName", "lastName", "test@mail.com", false);
 
     when(repository.findById(userId)).thenReturn(Optional.of(user));
 
@@ -188,8 +188,9 @@ class UserServiceTest extends TestSupport {
   @Test
   void testActivateUser_whenUserIdExist_itShouldUserActiveTrue() {
 
-    User user = new User(userId, "firstName", "middleName", "lastName", "test@mail.com", false);
-    User savedUser = new User(userId, "firstName", "middleName", "lastName", "test@mail.com", true);
+    Users user = new Users(userId, "firstName", "middleName", "lastName", "test@mail.com", false);
+    Users savedUser =
+        new Users(userId, "firstName", "middleName", "lastName", "test@mail.com", true);
 
     when(repository.findById(userId)).thenReturn(Optional.of(user));
 
@@ -213,7 +214,7 @@ class UserServiceTest extends TestSupport {
   @Test
   void testDeleteUser_whenUserIdExist_itShouldDeleteUser() {
 
-    User user = new User(userId, "firstName", "middleName", "lastName", "test@mail.com", true);
+    Users user = new Users(userId, "firstName", "middleName", "lastName", "test@mail.com", true);
 
     when(repository.findById(userId)).thenReturn(Optional.of(user));
 
