@@ -5,8 +5,8 @@ import com.springCommerce.commerce.dto.UpdateUserRequest;
 import com.springCommerce.commerce.dto.UserDto;
 import com.springCommerce.commerce.dto.UserDtoConverter;
 import com.springCommerce.commerce.exception.*;
-import com.springCommerce.commerce.model.User;
-import com.springCommerce.commerce.repository.UserRepository;
+import com.springCommerce.commerce.model.Users;
+import com.springCommerce.commerce.repository.UsersRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -18,50 +18,50 @@ public class UserService {
 
   private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
-  private final UserRepository userRepository;
+  private final UsersRepository usersRepository;
   private final UserDtoConverter userDtoConverter;
 
-  public UserService(UserRepository userRepository, UserDtoConverter userDtoConverter) {
-    this.userRepository = userRepository;
+  public UserService(UsersRepository usersRepository, UserDtoConverter userDtoConverter) {
+    this.usersRepository = usersRepository;
     this.userDtoConverter = userDtoConverter;
   }
 
   public List<UserDto> getAllUsers() {
-    return userDtoConverter.convert(userRepository.findAll());
+    return userDtoConverter.convert(usersRepository.findAll());
   }
 
   public UserDto getUserByMail(String mail) {
-    User user = findUserByMail(mail);
+    Users user = findUserByMail(mail);
     return userDtoConverter.convert(user);
   }
 
   public UserDto createUser(CreateUserRequest createUserRequest) {
-    User user =
-        new User(
+    Users user =
+        new Users(
             createUserRequest.getFirstName(),
             createUserRequest.getMiddleName(),
             createUserRequest.getLastName(),
             createUserRequest.getMail(),
             false);
-    return userDtoConverter.convert(userRepository.save(user));
+    return userDtoConverter.convert(usersRepository.save(user));
   }
 
-  private User findUserById(Long id) {
-    return userRepository
+  private Users findUserById(Long id) {
+    return usersRepository
         .findById(id)
         .orElseThrow(
             () -> new UserNotFoundException("User could not be found by following id: " + id));
   }
 
-  private User findUserByMail(String mail) {
-    return userRepository
+  private Users findUserByMail(String mail) {
+    return usersRepository
         .findByMail(mail)
         .orElseThrow(
             () -> new UserNotFoundException("User could not be found by following mail: " + mail));
   }
 
   public UserDto updateUser(String mail, UpdateUserRequest updateUserRequest) {
-    User user = findUserByMail(mail);
+    Users user = findUserByMail(mail);
     if (!user.getIsActive()) {
       logger.warn("The user wanted update is not active!, user mail: {}", mail);
       throw new UserIsNotActiveException("The user wanted update is not active!");
@@ -73,7 +73,7 @@ public class UserService {
     user.setMail(user.getMail());
     user.setIsActive(user.getIsActive());
 
-    return userDtoConverter.convert(userRepository.save(user));
+    return userDtoConverter.convert(usersRepository.save(user));
   }
 
   public void deactivateUser(Long id) {
@@ -85,13 +85,13 @@ public class UserService {
   }
 
   private void changeActivateUser(Long id, Boolean isActive) {
-    User user = findUserById(id);
+    Users user = findUserById(id);
     user.setIsActive(isActive);
-    userRepository.save(user);
+    usersRepository.save(user);
   }
 
   public void deleteUser(Long id) {
     findUserById(id);
-    userRepository.deleteById(id);
+    usersRepository.deleteById(id);
   }
 }

@@ -1,7 +1,7 @@
 package com.springCommerce.commerce;
 
 import com.springCommerce.commerce.dto.UserDto;
-import com.springCommerce.commerce.model.User;
+import com.springCommerce.commerce.model.Users;
 
 import java.util.List;
 import java.util.Random;
@@ -13,12 +13,12 @@ public class TestSupport {
 
   public static Long userId = 100L;
 
-  public static List<User> generateUsers() {
+  public static List<Users> generateUsers() {
 
     return IntStream.range(0, 5)
         .mapToObj(
             i ->
-                new User(
+                new Users(
                     ((long) i),
                     i + "firstName",
                     i + "middleName",
@@ -28,7 +28,7 @@ public class TestSupport {
         .collect(Collectors.toList());
   }
 
-  public static List<UserDto> generateUserDtoList(List<User> userList) {
+  public static List<UserDto> generateUserDtoList(List<Users> userList) {
     return userList.stream()
         .map(
             from ->
@@ -37,8 +37,8 @@ public class TestSupport {
         .collect(Collectors.toList());
   }
 
-  public static User generateUser(String mail) {
-    return new User(
+  public static Users generateUser(String mail) {
+    return new Users(
         userId, userId + "firstName", userId + "middleName", userId + "lastName", mail, true);
   }
 
