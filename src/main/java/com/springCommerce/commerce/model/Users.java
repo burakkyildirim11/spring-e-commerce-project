@@ -3,6 +3,7 @@ package com.springCommerce.commerce.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,17 +30,26 @@ public class Users {
 
   @NonNull private Boolean isActive;
 
+  @NonNull
   @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  private Set<UserDetails> userDetailsSet;
+  private Set<UserDetails> userDetailsSet = new HashSet<>();
 
-  public Users(Long id, @NonNull String firstName, @NonNull String middleName, @NonNull String lastName, @NonNull String mail, @NonNull Boolean isActive) {
-    this.id = id;
-    this.firstName = firstName;
-    this.middleName = middleName;
-    this.lastName = lastName;
-    this.mail = mail;
-    this.isActive = isActive;
-  }
+//  public Users(Long id, @NonNull String firstName, @NonNull String middleName, @NonNull String lastName, @NonNull String mail, @NonNull Boolean isActive) {
+//    this.id = id;
+//    this.firstName = firstName;
+//    this.middleName = middleName;
+//    this.lastName = lastName;
+//    this.mail = mail;
+//    this.isActive = isActive;
+//  }
+//
+//  public Users(@NonNull String firstName, @NonNull String middleName, @NonNull String lastName, @NonNull String mail, @NonNull Boolean isActive) {
+//    this.firstName = firstName;
+//    this.middleName = middleName;
+//    this.lastName = lastName;
+//    this.mail = mail;
+//    this.isActive = isActive;
+//  }
 
   @Override
   public boolean equals(Object o) {

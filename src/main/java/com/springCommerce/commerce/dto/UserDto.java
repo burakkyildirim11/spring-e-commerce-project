@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,4 +16,5 @@ public class UserDto {
   private String middleName;
   private String lastName;
   private String mail;
+  private List<UserDetailsDto> userDetailsDto;
 }
