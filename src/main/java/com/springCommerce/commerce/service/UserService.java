@@ -35,7 +35,7 @@ public class UserService {
     return userDtoConverter.convert(user);
   }
 
-  public UserDto createUser(CreateUserRequest createUserRequest) {
+  public UserDto createUser(final CreateUserRequest createUserRequest) {
     Users user =
         new Users(
             createUserRequest.getFirstName(),
@@ -46,21 +46,21 @@ public class UserService {
     return userDtoConverter.convert(usersRepository.save(user));
   }
 
-  private Users findUserById(Long id) {
+  protected Users findUserById(final Long id) {
     return usersRepository
         .findById(id)
         .orElseThrow(
             () -> new UserNotFoundException("User could not be found by following id: " + id));
   }
 
-  private Users findUserByMail(String mail) {
+  private Users findUserByMail(final String mail) {
     return usersRepository
         .findByMail(mail)
         .orElseThrow(
             () -> new UserNotFoundException("User could not be found by following mail: " + mail));
   }
 
-  public UserDto updateUser(String mail, UpdateUserRequest updateUserRequest) {
+  public UserDto updateUser(final String mail, final UpdateUserRequest updateUserRequest) {
     Users user = findUserByMail(mail);
     if (!user.getIsActive()) {
       logger.warn("The user wanted update is not active!, user mail: {}", mail);
@@ -76,21 +76,21 @@ public class UserService {
     return userDtoConverter.convert(usersRepository.save(user));
   }
 
-  public void deactivateUser(Long id) {
+  public void deactivateUser(final Long id) {
     changeActivateUser(id, false);
   }
 
-  public void activateUser(Long id) {
+  public void activateUser(final Long id) {
     changeActivateUser(id, true);
   }
 
-  private void changeActivateUser(Long id, Boolean isActive) {
+  private void changeActivateUser(final Long id, final Boolean isActive) {
     Users user = findUserById(id);
     user.setIsActive(isActive);
     usersRepository.save(user);
   }
 
-  public void deleteUser(Long id) {
+  public void deleteUser(final Long id) {
     findUserById(id);
     usersRepository.deleteById(id);
   }
