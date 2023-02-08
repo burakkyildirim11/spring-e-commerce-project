@@ -13,9 +13,6 @@ import java.util.Objects;
 @NoArgsConstructor
 public class UserDetails {
 
-  @JoinColumn(name = "users_id", nullable = false)
-  @ManyToOne(fetch = FetchType.LAZY)
-  Users users;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,15 +24,12 @@ public class UserDetails {
   @NonNull private String country;
   @NonNull private String postCode;
 
-  public UserDetails(@NonNull String phoneNumber, @NonNull String address, @NonNull String city, @NonNull String country, @NonNull String postCode, Users user) {
-    this.id = id;
-    this.phoneNumber = phoneNumber;
-    this.address = address;
-    this.city = city;
-    this.country = country;
-    this.postCode = postCode;
-    this.users = users;
-  }
+
+  @NonNull
+  @JoinColumn(name = "users_id", nullable = false)
+  @ManyToOne(fetch = FetchType.LAZY)
+  Users users;
+
 
   @Override
   public boolean equals(Object o) {
