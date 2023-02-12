@@ -30,6 +30,7 @@ public class Users {
 
   @NonNull private Boolean isActive;
 
+<<<<<<< HEAD
   @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<UserDetails> userDetailsSet = new HashSet<>();
 
@@ -41,6 +42,28 @@ public class Users {
     this.mail = mail;
     this.isActive = isActive;
   }
+=======
+  @NonNull
+  @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  private Set<UserDetails> userDetailsSet = new HashSet<>();
+
+//  public Users(Long id, @NonNull String firstName, @NonNull String middleName, @NonNull String lastName, @NonNull String mail, @NonNull Boolean isActive) {
+//    this.id = id;
+//    this.firstName = firstName;
+//    this.middleName = middleName;
+//    this.lastName = lastName;
+//    this.mail = mail;
+//    this.isActive = isActive;
+//  }
+//
+//  public Users(@NonNull String firstName, @NonNull String middleName, @NonNull String lastName, @NonNull String mail, @NonNull Boolean isActive) {
+//    this.firstName = firstName;
+//    this.middleName = middleName;
+//    this.lastName = lastName;
+//    this.mail = mail;
+//    this.isActive = isActive;
+//  }
+>>>>>>> e0ccc1d1a10e3cc3ce19b2021b7aaa80e32cefc2
 
   @Override
   public boolean equals(Object o) {

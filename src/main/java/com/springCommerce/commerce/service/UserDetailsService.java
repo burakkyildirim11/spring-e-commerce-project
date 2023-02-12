@@ -6,6 +6,11 @@ import com.springCommerce.commerce.dto.*;
 import com.springCommerce.commerce.model.*;
 import com.springCommerce.commerce.repository.*;
 
+<<<<<<< HEAD
+=======
+import java.util.Optional;
+
+>>>>>>> e0ccc1d1a10e3cc3ce19b2021b7aaa80e32cefc2
 @Service
 public class UserDetailsService {
 

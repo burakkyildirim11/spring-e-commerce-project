@@ -26,7 +26,11 @@ public class UserController {
 
   @GetMapping("/{mail}")
   public ResponseEntity<UserDto> getUserByMail(
+<<<<<<< HEAD
           @PathVariable(value = "mail") String mail) {
+=======
+      @PathVariable(value = "mail") String mail) {
+>>>>>>> e0ccc1d1a10e3cc3ce19b2021b7aaa80e32cefc2
     return ResponseEntity.ok(userService.getUserByMail(mail));
   }
 

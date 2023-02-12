@@ -37,16 +37,29 @@ public class UserDetails {
     if (o == null || getClass() != o.getClass()) return false;
     UserDetails that = (UserDetails) o;
     return Objects.equals(id, that.id)
+<<<<<<< HEAD
             && phoneNumber.equals(that.phoneNumber)
             && address.equals(that.address)
             && city.equals(that.city)
             && country.equals(that.country)
             && postCode.equals(that.postCode)
             && users.equals(that.users);
+=======
+        && phoneNumber.equals(that.phoneNumber)
+        && address.equals(that.address)
+        && city.equals(that.city)
+        && country.equals(that.country)
+        && postCode.equals(that.postCode)
+        && users.equals(that.users);
+>>>>>>> e0ccc1d1a10e3cc3ce19b2021b7aaa80e32cefc2
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(id, phoneNumber, address, city, country, postCode, users);
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> e0ccc1d1a10e3cc3ce19b2021b7aaa80e32cefc2

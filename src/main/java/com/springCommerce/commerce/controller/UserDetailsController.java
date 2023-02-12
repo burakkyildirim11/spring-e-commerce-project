@@ -33,4 +33,8 @@ public class UserDetailsController {
     return ResponseEntity.ok().build();
   }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> e0ccc1d1a10e3cc3ce19b2021b7aaa80e32cefc2
