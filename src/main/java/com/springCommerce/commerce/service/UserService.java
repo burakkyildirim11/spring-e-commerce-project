@@ -46,7 +46,7 @@ public class UserService {
     return userDtoConverter.convert(usersRepository.save(user));
   }
 
-  private Users findUserById(Long id) {
+  public Users findUserById(Long id) {
     return usersRepository
         .findById(id)
         .orElseThrow(

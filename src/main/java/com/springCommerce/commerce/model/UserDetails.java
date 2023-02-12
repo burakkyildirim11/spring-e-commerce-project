@@ -37,12 +37,12 @@ public class UserDetails {
     if (o == null || getClass() != o.getClass()) return false;
     UserDetails that = (UserDetails) o;
     return Objects.equals(id, that.id)
-        && phoneNumber.equals(that.phoneNumber)
-        && address.equals(that.address)
-        && city.equals(that.city)
-        && country.equals(that.country)
-        && postCode.equals(that.postCode)
-        && users.equals(that.users);
+            && phoneNumber.equals(that.phoneNumber)
+            && address.equals(that.address)
+            && city.equals(that.city)
+            && country.equals(that.country)
+            && postCode.equals(that.postCode)
+            && users.equals(that.users);
   }
 
   @Override

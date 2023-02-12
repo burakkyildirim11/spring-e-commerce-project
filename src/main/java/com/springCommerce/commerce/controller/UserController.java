@@ -26,7 +26,7 @@ public class UserController {
 
   @GetMapping("/{mail}")
   public ResponseEntity<UserDto> getUserByMail(
-      @RequestParam(value = "mail") @PathVariable String mail) {
+          @PathVariable(value = "mail") String mail) {
     return ResponseEntity.ok(userService.getUserByMail(mail));
   }
 
