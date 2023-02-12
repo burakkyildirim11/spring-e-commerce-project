@@ -6,11 +6,8 @@ import com.springCommerce.commerce.dto.*;
 import com.springCommerce.commerce.model.*;
 import com.springCommerce.commerce.repository.*;
 
-<<<<<<< HEAD
-=======
 import java.util.Optional;
 
->>>>>>> e0ccc1d1a10e3cc3ce19b2021b7aaa80e32cefc2
 @Service
 public class UserDetailsService {
 
@@ -19,9 +16,9 @@ public class UserDetailsService {
   private final UserDetailsDtoConverter converter;
 
   public UserDetailsService(
-      UserDetailsRepository userDetailsRepository,
-      UserService userService,
-      UserDetailsDtoConverter converter) {
+          UserDetailsRepository userDetailsRepository,
+          UserService userService,
+          UserDetailsDtoConverter converter) {
     this.userDetailsRepository = userDetailsRepository;
     this.userService = userService;
     this.converter = converter;
@@ -32,19 +29,19 @@ public class UserDetailsService {
     Users user = userService.findUserById(request.getUserId());
 
     UserDetails userDetails =
-        new UserDetails(
-            request.getPhoneNumber(),
-            request.getAddress(),
-            request.getCity(),
-            request.getCountry(),
-            request.getPostCode(),
-            user);
+            new UserDetails(
+                    request.getPhoneNumber(),
+                    request.getAddress(),
+                    request.getCity(),
+                    request.getCountry(),
+                    request.getPostCode(),
+                    user);
 
     return converter.convert(userDetailsRepository.save(userDetails));
   }
 
   public UserDetailsDto updateUserDetails(
-      final Long userDetailsId, final UpdateUserDetailsRequest request) {
+          final Long userDetailsId, final UpdateUserDetailsRequest request) {
 
     UserDetails user = findUserDetailsById(userDetailsId);
 
@@ -64,11 +61,11 @@ public class UserDetailsService {
 
   private UserDetails findUserDetailsById(final Long userDetailsId) {
     return userDetailsRepository
-        .findById(userDetailsId)
-        .orElseThrow(
-            () ->
-                new UserDetailsNotFoundException(
-                    "User details could not be found by following user details id: "
-                        + userDetailsId));
+            .findById(userDetailsId)
+            .orElseThrow(
+                    () ->
+                            new UserDetailsNotFoundException(
+                                    "User details could not be found by following user details id: "
+                                            + userDetailsId));
   }
 }

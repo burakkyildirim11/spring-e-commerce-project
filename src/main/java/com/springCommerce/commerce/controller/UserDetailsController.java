@@ -18,12 +18,14 @@ public class UserDetailsController {
   }
 
   @PostMapping
-  public ResponseEntity<UserDetailsDto> createUserDetails(@RequestBody CreateUserDetailsRequest request) {
+  public ResponseEntity<UserDetailsDto> createUserDetails(
+      @RequestBody CreateUserDetailsRequest request) {
     return ResponseEntity.ok(userDetailsService.createUserDetails(request));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<UserDetailsDto> updateUserDetails(@PathVariable Long id ,@RequestBody UpdateUserDetailsRequest request) {
+  public ResponseEntity<UserDetailsDto> updateUserDetails(
+      @PathVariable Long id, @RequestBody UpdateUserDetailsRequest request) {
     return ResponseEntity.ok(userDetailsService.updateUserDetails(id, request));
   }
 
@@ -32,9 +34,4 @@ public class UserDetailsController {
     userDetailsService.deleteUserDetails(id);
     return ResponseEntity.ok().build();
   }
-
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> e0ccc1d1a10e3cc3ce19b2021b7aaa80e32cefc2
+  }

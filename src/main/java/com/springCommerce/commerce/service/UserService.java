@@ -37,31 +37,27 @@ public class UserService {
 
   public UserDto createUser(final CreateUserRequest createUserRequest) {
     Users user =
-        new Users(
-            createUserRequest.getFirstName(),
-            createUserRequest.getMiddleName(),
-            createUserRequest.getLastName(),
-            createUserRequest.getMail(),
-            false);
+            new Users(
+                    createUserRequest.getFirstName(),
+                    createUserRequest.getMiddleName(),
+                    createUserRequest.getLastName(),
+                    createUserRequest.getMail(),
+                    false);
     return userDtoConverter.convert(usersRepository.save(user));
   }
 
-<<<<<<< HEAD
-  public Users findUserById(Long id) {
-=======
   protected Users findUserById(final Long id) {
->>>>>>> e0ccc1d1a10e3cc3ce19b2021b7aaa80e32cefc2
     return usersRepository
-        .findById(id)
-        .orElseThrow(
-            () -> new UserNotFoundException("User could not be found by following id: " + id));
+            .findById(id)
+            .orElseThrow(
+                    () -> new UserNotFoundException("User could not be found by following id: " + id));
   }
 
   private Users findUserByMail(final String mail) {
     return usersRepository
-        .findByMail(mail)
-        .orElseThrow(
-            () -> new UserNotFoundException("User could not be found by following mail: " + mail));
+            .findByMail(mail)
+            .orElseThrow(
+                    () -> new UserNotFoundException("User could not be found by following mail: " + mail));
   }
 
   public UserDto updateUser(final String mail, final UpdateUserRequest updateUserRequest) {
