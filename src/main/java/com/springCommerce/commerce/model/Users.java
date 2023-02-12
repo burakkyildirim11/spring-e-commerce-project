@@ -34,22 +34,22 @@ public class Users {
   @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<UserDetails> userDetailsSet = new HashSet<>();
 
-//  public Users(Long id, @NonNull String firstName, @NonNull String middleName, @NonNull String lastName, @NonNull String mail, @NonNull Boolean isActive) {
-//    this.id = id;
-//    this.firstName = firstName;
-//    this.middleName = middleName;
-//    this.lastName = lastName;
-//    this.mail = mail;
-//    this.isActive = isActive;
-//  }
-//
-//  public Users(@NonNull String firstName, @NonNull String middleName, @NonNull String lastName, @NonNull String mail, @NonNull Boolean isActive) {
-//    this.firstName = firstName;
-//    this.middleName = middleName;
-//    this.lastName = lastName;
-//    this.mail = mail;
-//    this.isActive = isActive;
-//  }
+  //  public Users(Long id, @NonNull String firstName, @NonNull String middleName, @NonNull String lastName, @NonNull String mail, @NonNull Boolean isActive) {
+  //    this.id = id;
+  //    this.firstName = firstName;
+  //    this.middleName = middleName;
+  //    this.lastName = lastName;
+  //    this.mail = mail;
+  //    this.isActive = isActive;
+  //  }
+  //
+  //  public Users(@NonNull String firstName, @NonNull String middleName, @NonNull String lastName, @NonNull String mail, @NonNull Boolean isActive) {
+  //    this.firstName = firstName;
+  //    this.middleName = middleName;
+  //    this.lastName = lastName;
+  //    this.mail = mail;
+  //    this.isActive = isActive;
+  //  }
 
   @Override
   public boolean equals(Object o) {
@@ -57,11 +57,11 @@ public class Users {
     if (o == null || getClass() != o.getClass()) return false;
     Users user = (Users) o;
     return Objects.equals(id, user.id)
-        && firstName.equals(user.firstName)
-        && middleName.equals(user.middleName)
-        && lastName.equals(user.lastName)
-        && mail.equals(user.mail)
-        && isActive.equals(user.isActive);
+            && firstName.equals(user.firstName)
+            && middleName.equals(user.middleName)
+            && lastName.equals(user.lastName)
+            && mail.equals(user.mail)
+            && isActive.equals(user.isActive);
   }
 
   @Override

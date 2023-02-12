@@ -26,7 +26,7 @@ public class UserController {
 
   @GetMapping("/{mail}")
   public ResponseEntity<UserDto> getUserByMail(
-      @PathVariable(value = "mail") String mail) {
+          @PathVariable(value = "mail") String mail) {
     return ResponseEntity.ok(userService.getUserByMail(mail));
   }
 
@@ -37,7 +37,7 @@ public class UserController {
 
   @PutMapping("/{mail}")
   public ResponseEntity<UserDto> updateUser(
-      @PathVariable("mail") String mail, @RequestBody UpdateUserRequest updateUserRequest) {
+          @PathVariable("mail") String mail, @RequestBody UpdateUserRequest updateUserRequest) {
     return ResponseEntity.ok(userService.updateUser(mail, updateUserRequest));
   }
 
