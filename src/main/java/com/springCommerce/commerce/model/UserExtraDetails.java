@@ -11,7 +11,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDetails {
+public class UserExtraDetails {
 
 
   @Id
@@ -35,7 +35,7 @@ public class UserDetails {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    UserDetails that = (UserDetails) o;
+    UserExtraDetails that = (UserExtraDetails) o;
     return Objects.equals(id, that.id)
             && phoneNumber.equals(that.phoneNumber)
             && address.equals(that.address)

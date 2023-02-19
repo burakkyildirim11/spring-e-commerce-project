@@ -6,11 +6,13 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateUserDetailsRequest {
+public class CreateUserExtraDetailsRequest {
 
   private String phoneNumber;
-  private String address;
   private String city;
   private String country;
   private String postCode;
+  private String address;
+  private Long userId;
+
 }

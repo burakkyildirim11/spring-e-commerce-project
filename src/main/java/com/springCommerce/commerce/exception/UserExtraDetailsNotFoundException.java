@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class UserDetailsNotFoundException extends RuntimeException {
+public class UserExtraDetailsNotFoundException extends RuntimeException {
 
-    public UserDetailsNotFoundException(String message) {
+    public UserExtraDetailsNotFoundException(String message) {
         super(message);
     }
 }
