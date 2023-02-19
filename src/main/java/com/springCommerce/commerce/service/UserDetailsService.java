@@ -6,6 +6,8 @@ import com.springCommerce.commerce.dto.*;
 import com.springCommerce.commerce.model.*;
 import com.springCommerce.commerce.repository.*;
 
+import java.util.Optional;
+
 @Service
 public class UserDetailsService {
 
@@ -24,7 +26,7 @@ public class UserDetailsService {
 
   public UserDetailsDto createUserDetails(final CreateUserDetailsRequest request) {
 
-    BasicUser basicUser = userService.findUserById(request.getUserId());
+    Users user = userService.findUserById(request.getUserId());
 
     UserDetails userDetails =
             new UserDetails(
@@ -32,7 +34,8 @@ public class UserDetailsService {
                     request.getAddress(),
                     request.getCity(),
                     request.getCountry(),
-                    request.getPostCode(), basicUser);
+                    request.getPostCode(),
+                    user);
 
     return converter.convert(userDetailsRepository.save(userDetails));
   }

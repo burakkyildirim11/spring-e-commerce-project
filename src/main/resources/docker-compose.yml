@@ -17,11 +17,3 @@ services:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     depends_on:
       - elasticsearch
-  mysql:
-    image: mysql:latest
-    ports:
-       - '3306:3306'
-    expose:
-      - '3306'
-    environment:
-      MYSQL_ROOT_PASSWORD: "root123"

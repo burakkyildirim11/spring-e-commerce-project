@@ -13,8 +13,8 @@ import java.util.Set;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
-@Table(name = "basicUser")
-public class BasicUser {
+@Table(name = "users")
+public class Users {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +30,8 @@ public class BasicUser {
 
   @NonNull private Boolean isActive;
 
-
-  @OneToMany(mappedBy = "basicUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @NonNull
+  @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<UserDetails> userDetailsSet = new HashSet<>();
 
   //  public Users(Long id, @NonNull String firstName, @NonNull String middleName, @NonNull String lastName, @NonNull String mail, @NonNull Boolean isActive) {
@@ -55,13 +55,13 @@ public class BasicUser {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    BasicUser basicUser = (BasicUser) o;
-    return Objects.equals(id, basicUser.id)
-            && firstName.equals(basicUser.firstName)
-            && middleName.equals(basicUser.middleName)
-            && lastName.equals(basicUser.lastName)
-            && mail.equals(basicUser.mail)
-            && isActive.equals(basicUser.isActive);
+    Users user = (Users) o;
+    return Objects.equals(id, user.id)
+            && firstName.equals(user.firstName)
+            && middleName.equals(user.middleName)
+            && lastName.equals(user.lastName)
+            && mail.equals(user.mail)
+            && isActive.equals(user.isActive);
   }
 
   @Override

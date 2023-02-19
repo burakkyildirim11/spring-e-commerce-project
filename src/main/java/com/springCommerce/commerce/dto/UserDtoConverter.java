@@ -1,6 +1,6 @@
 package com.springCommerce.commerce.dto;
 
-import com.springCommerce.commerce.model.BasicUser;
+import com.springCommerce.commerce.model.Users;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -16,17 +16,17 @@ public class UserDtoConverter {
         this.converter = converter;
     }
 
-    public UserDto convert(BasicUser basicUser) {
+    public UserDto convert(Users user) {
         return new UserDto(
-                basicUser.getFirstName(),
-                basicUser.getMiddleName(),
-                basicUser.getLastName(),
-                basicUser.getMail(),
-                converter.convert(new ArrayList<>(basicUser.getUserDetailsSet())));
+                user.getFirstName(),
+                user.getMiddleName(),
+                user.getLastName(),
+                user.getMail(),
+                converter.convert(new ArrayList<>(user.getUserDetailsSet())));
     }
 
-    public List<UserDto> convert(List<BasicUser> basicBasicUserList) {
-        return basicBasicUserList.stream()
+    public List<UserDto> convert(List<Users> userList) {
+        return userList.stream()
                 .map(
                         user ->
                                 new UserDto(
