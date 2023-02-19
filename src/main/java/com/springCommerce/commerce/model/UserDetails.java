@@ -11,6 +11,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "user_details")
 public class UserDetails {
 
 
@@ -26,9 +27,9 @@ public class UserDetails {
 
 
   @NonNull
-  @JoinColumn(name = "users_id", nullable = false)
   @ManyToOne(fetch = FetchType.LAZY)
-  Users users;
+  @JoinColumn(name = "basicUser_id", nullable = false)
+  BasicUser basicUser;
 
 
   @Override
@@ -42,11 +43,11 @@ public class UserDetails {
             && city.equals(that.city)
             && country.equals(that.country)
             && postCode.equals(that.postCode)
-            && users.equals(that.users);
+            && basicUser.equals(that.basicUser);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, phoneNumber, address, city, country, postCode, users);
+    return Objects.hash(id, phoneNumber, address, city, country, postCode, basicUser);
   }
 }

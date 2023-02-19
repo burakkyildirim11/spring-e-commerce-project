@@ -5,8 +5,8 @@ import com.springCommerce.commerce.dto.UpdateUserRequest;
 import com.springCommerce.commerce.dto.UserDto;
 import com.springCommerce.commerce.dto.UserDtoConverter;
 import com.springCommerce.commerce.exception.*;
-import com.springCommerce.commerce.model.Users;
-import com.springCommerce.commerce.repository.UsersRepository;
+import com.springCommerce.commerce.model.BasicUser;
+import com.springCommerce.commerce.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -18,62 +18,62 @@ public class UserService {
 
   private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
-  private final UsersRepository usersRepository;
+  private final UserRepository userRepository;
   private final UserDtoConverter userDtoConverter;
 
-  public UserService(UsersRepository usersRepository, UserDtoConverter userDtoConverter) {
-    this.usersRepository = usersRepository;
+  public UserService(UserRepository userRepository, UserDtoConverter userDtoConverter) {
+    this.userRepository = userRepository;
     this.userDtoConverter = userDtoConverter;
   }
 
   public List<UserDto> getAllUsers() {
-    return userDtoConverter.convert(usersRepository.findAll());
+    return userDtoConverter.convert(userRepository.findAll());
   }
 
   public UserDto getUserByMail(String mail) {
-    Users user = findUserByMail(mail);
-    return userDtoConverter.convert(user);
+    BasicUser basicUser = findUserByMail(mail);
+    return userDtoConverter.convert(basicUser);
   }
 
   public UserDto createUser(final CreateUserRequest createUserRequest) {
-    Users user =
-            new Users(
+    BasicUser basicUser =
+            new BasicUser(
                     createUserRequest.getFirstName(),
                     createUserRequest.getMiddleName(),
                     createUserRequest.getLastName(),
                     createUserRequest.getMail(),
                     false);
-    return userDtoConverter.convert(usersRepository.save(user));
+    return userDtoConverter.convert(userRepository.save(basicUser));
   }
 
-  protected Users findUserById(final Long id) {
-    return usersRepository
+  protected BasicUser findUserById(final Long id) {
+    return userRepository
             .findById(id)
             .orElseThrow(
                     () -> new UserNotFoundException("User could not be found by following id: " + id));
   }
 
-  private Users findUserByMail(final String mail) {
-    return usersRepository
+  private BasicUser findUserByMail(final String mail) {
+    return userRepository
             .findByMail(mail)
             .orElseThrow(
                     () -> new UserNotFoundException("User could not be found by following mail: " + mail));
   }
 
   public UserDto updateUser(final String mail, final UpdateUserRequest updateUserRequest) {
-    Users user = findUserByMail(mail);
-    if (!user.getIsActive()) {
+    BasicUser basicUser = findUserByMail(mail);
+    if (!basicUser.getIsActive()) {
       logger.warn("The user wanted update is not active!, user mail: {}", mail);
       throw new UserIsNotActiveException("The user wanted update is not active!");
     }
 
-    user.setFirstName(updateUserRequest.getFirstName());
-    user.setMiddleName(updateUserRequest.getMiddleName());
-    user.setLastName(updateUserRequest.getLastName());
-    user.setMail(user.getMail());
-    user.setIsActive(user.getIsActive());
+    basicUser.setFirstName(updateUserRequest.getFirstName());
+    basicUser.setMiddleName(updateUserRequest.getMiddleName());
+    basicUser.setLastName(updateUserRequest.getLastName());
+    basicUser.setMail(basicUser.getMail());
+    basicUser.setIsActive(basicUser.getIsActive());
 
-    return userDtoConverter.convert(usersRepository.save(user));
+    return userDtoConverter.convert(userRepository.save(basicUser));
   }
 
   public void deactivateUser(final Long id) {
@@ -85,13 +85,13 @@ public class UserService {
   }
 
   private void changeActivateUser(final Long id, final Boolean isActive) {
-    Users user = findUserById(id);
-    user.setIsActive(isActive);
-    usersRepository.save(user);
+    BasicUser basicUser = findUserById(id);
+    basicUser.setIsActive(isActive);
+    userRepository.save(basicUser);
   }
 
   public void deleteUser(final Long id) {
     findUserById(id);
-    usersRepository.deleteById(id);
+    userRepository.deleteById(id);
   }
 }
