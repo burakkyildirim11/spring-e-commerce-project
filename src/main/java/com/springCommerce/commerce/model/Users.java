@@ -32,7 +32,7 @@ public class Users {
 
   @NonNull
   @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  private Set<UserDetails> userDetailsSet = new HashSet<>();
+  private Set<UserExtraDetails> userExtraDetailsSet = new HashSet<>();
 
   //  public Users(Long id, @NonNull String firstName, @NonNull String middleName, @NonNull String lastName, @NonNull String mail, @NonNull Boolean isActive) {
   //    this.id = id;

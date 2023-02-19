@@ -10,9 +10,9 @@ import java.util.stream.Collectors;
 @Component
 public class UserDtoConverter {
 
-    private final UserDetailsDtoConverter converter;
+    private final UserExtraDetailsDtoConverter converter;
 
-    public UserDtoConverter(UserDetailsDtoConverter converter) {
+    public UserDtoConverter(UserExtraDetailsDtoConverter converter) {
         this.converter = converter;
     }
 
@@ -22,7 +22,7 @@ public class UserDtoConverter {
                 user.getMiddleName(),
                 user.getLastName(),
                 user.getMail(),
-                converter.convert(new ArrayList<>(user.getUserDetailsSet())));
+                converter.convert(new ArrayList<>(user.getUserExtraDetailsSet())));
     }
 
     public List<UserDto> convert(List<Users> userList) {
@@ -34,7 +34,7 @@ public class UserDtoConverter {
                                         user.getMiddleName(),
                                         user.getLastName(),
                                         user.getMail(),
-                                        converter.convert(new ArrayList<>(user.getUserDetailsSet()))))
+                                        converter.convert(new ArrayList<>(user.getUserExtraDetailsSet()))))
                 .collect(Collectors.toList());
     }
 }

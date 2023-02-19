@@ -16,5 +16,5 @@ public class UserDto {
   private String middleName;
   private String lastName;
   private String mail;
-  private List<UserDetailsDto> userDetailsDto;
+  private List<UserExtraDetailsDto> userExtraDetailsDto;
 }
