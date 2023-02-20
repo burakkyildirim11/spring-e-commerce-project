@@ -1,12 +1,12 @@
 //package com.springCommerce.commerce.service;
 //
-//import com.springCommerce.commerce.dto.CreateUserRequest;
-//import com.springCommerce.commerce.model.Users;
+//import CreateUserRequest;
+//import Users;
 //import com.springCommerce.commerce.dto.*;
 //import com.springCommerce.commerce.exception.*;
 //import com.springCommerce.commerce.TestSupport;
-//import com.springCommerce.commerce.dto.UserDtoConverter;
-//import com.springCommerce.commerce.repository.UsersRepository;
+//import UserDtoConverter;
+//import UsersRepository;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
 //

@@ -1,7 +1,7 @@
 //package com.springCommerce.commerce;
 //
-//import com.springCommerce.commerce.dto.UserDto;
-//import com.springCommerce.commerce.model.Users;
+//import UserDto;
+//import Users;
 //
 //import java.util.List;
 //import java.util.Random;
